@@ -6,7 +6,7 @@ $(function()
     var tCountLow = $('div.offset.ticketlist-total-count > b:first');
     var ticketCount = parseInt($(tCountHigh).text()) 
                     - parseInt($(tCountLow).text()) + 1;
-    for (var i = 0; i < ticketCount && !doRequest; ++i){
+    for (var i = 0; i < ticketCount; ++i){
       var elem = $('div.info-data.hideForList > div.emphasize:not(.done):first()');
       var ticketInfo = elem.text().trim();
       if (ticketInfo.charAt(0) != 'C'){ // TODO optimize & add features
@@ -19,6 +19,7 @@ $(function()
       $.ajax({
         url: "https://msoe.freshservice.com/helpdesk/tickets.json",
         success: function(result){
+          console.log("did request");
           var currentTime = new Date();
           for (var i = 0; i < ticketCount; ++i){
             var elem = $('div.info-data.hideForList > div.emphasize:not(.done):first()');
@@ -58,5 +59,9 @@ $(function()
         }
       });
     }
-  }, 1000);
+  }, 100); // 1 ms was too fast and caused 300+ requests to be sent. 
+  // my guess - kept checking in between each individual element loading?
+  // I would have had to click about 10 times which is possible that I did. hmm.
+  // we'll stick with 100ms. It's fast enough to not be annoying to the user, but 
+  // also avoids sending extra requests to freshservice api.
 });
