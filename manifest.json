@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "Freshservice Ticket Helper",
+  "description": "This extension helps technicians use the Freshservice.com web application. - Gerry",
+  "version": "1.0",
+  
+  "content_scripts": 
+  [
+    {
+      "js": 
+      [
+        "jquery-3.2.1.js",
+        "java.js"
+      ],
+      "matches": 
+      [
+        "*://msoe.freshservice.com/helpdesk/tickets",
+        "*://msoe.freshservice.com/helpdesk/tickets/view/*",
+        "*://msoe.freshservice.com/helpdesk/tickets/filter/*"
+      ]
+    }
+  ]
+}
