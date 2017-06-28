@@ -1,11 +1,7 @@
 $(function()
 {
-  { // block is for scope management
-    ///* Uncomment this line to eliminate this block of code for testing.
-    // Always do one http request on page load to prevent UI delay.
-    // It's like I'm using setTimeout() as a while loop.
-    // This large block is only here because I cannot use 
-    // setTimeout() like a do-while loop.
+  {
+    ///* Uncomment this line to skip this block.
     var tCountHigh = $('div.offset.ticketlist-total-count > b:nth-child(2)');
     var tCountLow = $('div.offset.ticketlist-total-count > b:first');
     var ticketCount = parseInt($(tCountHigh).text()) 
