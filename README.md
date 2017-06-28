@@ -1,4 +1,4 @@
-Freshservice Extension for msoe.freshservice.com
+Freshservice Extension
 
 Displays "Created_at" field on tickets that don't list it due to them showing "Agent responded:", "Closed at:", "Resolved:", or "Requester responded:"
 This chrome extension will cause one http request to be sent to Freshservice every time a new page of tickets is viewed in the browser. 
