@@ -13,12 +13,19 @@
         "jquery-3.2.1.js",
         "java.js"
       ],
+      "css":
+      [
+        "style.css"
+      ],
       "matches": 
       [
         "*://msoe.freshservice.com/helpdesk/tickets",
+        "*://msoe.freshservice.com/helpdesk/tickets/*",
         "*://msoe.freshservice.com/helpdesk/tickets/view/*",
         "*://msoe.freshservice.com/helpdesk/tickets/filter/*"
       ]
     }
-  ]
+  ],
+  
+  "permissions": ["storage"]
 }
