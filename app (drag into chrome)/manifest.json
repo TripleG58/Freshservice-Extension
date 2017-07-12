@@ -19,10 +19,7 @@
       ],
       "matches": 
       [
-        "*://msoe.freshservice.com/helpdesk/tickets",
-        "*://msoe.freshservice.com/helpdesk/tickets/*",
-        "*://msoe.freshservice.com/helpdesk/tickets/view/*",
-        "*://msoe.freshservice.com/helpdesk/tickets/filter/*"
+        "*://msoe.freshservice.com/helpdesk/*"
       ]
     }
   ],
