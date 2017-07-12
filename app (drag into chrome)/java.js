@@ -107,22 +107,9 @@ $(function()
     if(url.charAt(0) == 's') // format https
       url = url.substring(1,url.length);
     console.log(url); 
-    if (url.match("://msoe.freshservice.com/helpdesk/tickets/(.*)")){
-      // individual ticket view
-      console.log("matched - individual ticket view");
-      // move sidebar to left & stylize
-      $('div.tkt-wrapper-inner.clearfix').css('margin', '0px').css('padding', '0px');
-      $('.tkt-sidebar').css('float', 'left');
-      $('.tkt-sidebar').css('margin-right', '50px');
-      $('#tkt-inner').css('padding-right', '0px');
-      $('#Pagearea').width($('#Pagearea').width()); // set constant width
-      $('.leftcontent').width($('#tkt-inner').width() - 370);
-      $('a.avatar-wrap').css('position', 'relative');
-      $('a.avatar-wrap').css('left', '-30px');
-    } 
-    else if (url == "://msoe.freshservice.com/helpdesk/tickets" 
-              || url.match("://msoe.freshservice.com/helpdesk/tickets/filter/(.*)") 
-              || url.match("://msoe.freshservice.com/helpdesk/tickets/view/(.*)")){
+    if (url == "://msoe.freshservice.com/helpdesk/tickets" 
+        || url.match("://msoe.freshservice.com/helpdesk/tickets/filter/(.*)") 
+        || url.match("://msoe.freshservice.com/helpdesk/tickets/view/(.*)")){
       // ticket list view
       // Here is where the real magic happens.
       var doRequest = false;
@@ -185,5 +172,18 @@ $(function()
         });
       }
     }
+    else if (url.match("://msoe.freshservice.com/helpdesk/tickets/(.*)")){
+      // individual ticket view
+      console.log("matched - individual ticket view");
+      // move sidebar to left & stylize
+      $('div.tkt-wrapper-inner.clearfix').css('margin', '0px').css('padding', '0px');
+      $('.tkt-sidebar').css('float', 'left');
+      $('.tkt-sidebar').css('margin-right', '50px');
+      $('#tkt-inner').css('padding-right', '0px');
+      $('#Pagearea').width($('#Pagearea').width()); // set constant width
+      $('.leftcontent').width($('#tkt-inner').width() - 370);
+      $('a.avatar-wrap').css('position', 'relative');
+      $('a.avatar-wrap').css('left', '-30px');
+    } 
   }, 1000);  
 });
