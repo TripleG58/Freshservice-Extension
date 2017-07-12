@@ -2,21 +2,6 @@
 .header-wrapper > * {
   vertical-align: middle;
 }
-div.tkt-wrapper-inner.clearfix {
-  margin: 0px;
-  padding: 0px;
-}
-.tkt-sidebar {
-  float: left;
-  margin-right: 50px;
-}
-#tkt-inner {
-  padding-right;
-}
-a.avatar-wrap {
-  position: relative;
-  left: -30px;
-}
 
 /* toggle switch link: https://www.w3schools.com/howto/howto_css_switch.asp */
 

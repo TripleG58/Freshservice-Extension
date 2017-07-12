@@ -87,7 +87,7 @@ $(function()
     // individual ticket view
     console.log("matched - individual ticket view");
     // move sidebar to left & stylize
-    // TODO test in css file
+    // Tested, injecting CSS gets overwritten
     $('div.tkt-wrapper-inner.clearfix').css('margin', '0px').css('padding', '0px');
     $('.tkt-sidebar').css('float', 'left');
     $('.tkt-sidebar').css('margin-right', '50px');
@@ -105,11 +105,27 @@ $(function()
     if(url.charAt(0) == 's') // format https
       url = url.substring(1,url.length);
     console.log(url); 
+    // specific ticket view
+    if (url.match("://msoe.freshservice.com/helpdesk/tickets/(.*)")){
+      // individual ticket view
+      console.log("matched - individual ticket view");
+      // move sidebar to left & stylize
+      // Tested, injecting CSS gets overwritten
+      $('div.tkt-wrapper-inner.clearfix').css('margin', '0px').css('padding', '0px');
+      $('.tkt-sidebar').css('float', 'left');
+      $('.tkt-sidebar').css('margin-right', '50px');
+      $('#tkt-inner').css('padding-right', '0px');
+      $('#Pagearea').width($('#Pagearea').width()); // set constant width
+      $('.leftcontent').width($('#tkt-inner').width() - 370);
+      $('a.avatar-wrap').css('position', 'relative');
+      $('a.avatar-wrap').css('left', '-30px');
+    }
     // sometimes, url changes, but page doesn't totally refresh
     // that is why this block is needed.
     // Tried jquery handlers on #next_page/prev_page buttons, but
     // the handlers only worked once per refresh, then they stopped working. 
     
+    // ticket list view
     // Here is where the real magic happens.
     var doRequest = false;
     var tCountHigh = $('div.offset.ticketlist-total-count > b:nth-child(2)');
