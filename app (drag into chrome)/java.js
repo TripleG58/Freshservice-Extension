@@ -25,10 +25,10 @@ $(function()
   
   // might need to wrap the following in if statement 
   // determining on/off state of extension from toggle switch
-  if(url == "://msoe.freshservice.com/helpdesk/tickets" || url.match("://msoe.freshservice.com/helpdesk/tickets/filter/(.*)") || url.match("://msoe.freshservice.com/helpdesk/tickets/view/(.*)")){
-    // put the rest of the code here - ticket list view
+  if(url == "://msoe.freshservice.com/helpdesk/tickets" 
+    || url.match("://msoe.freshservice.com/helpdesk/tickets/filter/(.*)") 
+    || url.match("://msoe.freshservice.com/helpdesk/tickets/view/(.*)")){
     console.log("matched - ticket list view");
-    // TODO use jquery .clone() method to make a dynamic copy of phone number field at the top of the page.
     
     // in the ticket list view, show date created 
     // along with time agent responded, etc.
@@ -41,7 +41,7 @@ $(function()
       $.ajax({
         url: "https://msoe.freshservice.com/helpdesk/tickets.json",
         success: function(result){
-          console.log("did request");
+          console.log("did request - on page load");
           var currentTime = new Date();
           for (var i = 0; i < ticketCount; ++i){
             var elem = $('div.info-data.hideForList > div.emphasize:not(.done):first()');
@@ -85,9 +85,10 @@ $(function()
   }
   else if (url.match("://msoe.freshservice.com/helpdesk/tickets/(.*)")){
     // individual ticket view
+    // TODO use jquery .clone() method to make a dynamic copy of required fields at the top of the page.
     console.log("matched - individual ticket view");
     // move sidebar to left & stylize
-    // Tested, injecting CSS gets overwritten
+    // Tested, injecting CSS gets overwritten - jQuery works
     $('div.tkt-wrapper-inner.clearfix').css('margin', '0px').css('padding', '0px');
     $('.tkt-sidebar').css('float', 'left');
     $('.tkt-sidebar').css('margin-right', '50px');
@@ -98,7 +99,8 @@ $(function()
     $('a.avatar-wrap').css('left', '-30px');
   }
   
-  // do this last
+  // do this last 
+  // had to use setInterval b/c url may change w/o refresh
   setInterval(function(){
     url = window.location.href;
     url = url.substring(4,url.length);
@@ -109,7 +111,6 @@ $(function()
       // individual ticket view
       console.log("matched - individual ticket view");
       // move sidebar to left & stylize
-      // Tested, injecting CSS gets overwritten
       $('div.tkt-wrapper-inner.clearfix').css('margin', '0px').css('padding', '0px');
       $('.tkt-sidebar').css('float', 'left');
       $('.tkt-sidebar').css('margin-right', '50px');
@@ -122,11 +123,6 @@ $(function()
     else if (url == "://msoe.freshservice.com/helpdesk/tickets" 
               || url.match("://msoe.freshservice.com/helpdesk/tickets/filter/(.*)") 
               || url.match("://msoe.freshservice.com/helpdesk/tickets/view/(.*)")){
-      // sometimes, url changes, but page doesn't totally refresh
-      // that is why this block is needed.
-      // Tried jquery handlers on #next_page/prev_page buttons, but
-      // the handlers only worked once per refresh, then they stopped working. 
-      
       // ticket list view
       // Here is where the real magic happens.
       var doRequest = false;
@@ -148,7 +144,7 @@ $(function()
         $.ajax({
           url: "https://msoe.freshservice.com/helpdesk/tickets.json",
           success: function(result){
-            console.log("did request");
+            console.log("did request - setInterval");
             var currentTime = new Date();
             for (var i = 0; i < ticketCount; ++i){
               var elem = $('div.info-data.hideForList > div.emphasize:not(.done):first()');
