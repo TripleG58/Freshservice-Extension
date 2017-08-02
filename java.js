@@ -2,7 +2,7 @@ $(function()
 {
   var url = window.location.href;
   url = url.substring(4,url.length);
-  if(url.charAt(0) == 's')
+  if(url.charAt(0) == 's') // remove 's' from 'https'
     url = url.substring(1,url.length);
   console.log(url);
   
@@ -66,8 +66,8 @@ $(function()
                 if (currentTime.getHours() > ticketTime.getHours())
                   elem.text(createdStr + tempDiff + " day ago, " + elem.text());
                 else 
-                  elem.text(createdStr + (currentTime.getHours() - ticketTime.getHours())
-                             + " hours ago, " + elem.text());
+                  elem.text(createdStr + (24 - (ticketTime.getHours() - currentTime.getHours())
+                            + " hours ago, " + elem.text()));
               }
               else if ((tempDiff = (currentTime.getHours() - ticketTime.getHours())) > 1)
                 elem.text(createdStr + "about " + tempDiff + " hours ago, " + elem.text());
@@ -105,7 +105,7 @@ $(function()
   }
   
   // do this last 
-  // had to use setInterval b/c url may change w/o refresh
+  // had to use setInterval b/c url may change w/o refresh - this is weird
   setInterval(function(){
     url = window.location.href;
     url = url.substring(4,url.length);
@@ -150,7 +150,11 @@ $(function()
                 if ((tempDiff = (currentTime.getFullYear() - ticketTime.getFullYear())) > 1)
                   elem.text(createdStr + "over " + tempDiff + " years ago, " + elem.text());
                 else if ((tempDiff = (currentTime.getFullYear() - ticketTime.getFullYear())) == 1)
-                  elem.text(createdStr + "over " + tempDiff + " year ago, " + elem.text());
+                  if (currentTime.getMonth() > ticketTime.getMonth())
+                    elem.text(createdStr + "over " + tempDiff + " year ago, " + elem.text());
+                  else 
+                    elem.text(createdStr + (12 - (ticketTime.getMonth() - currentTime.getMonth())
+                              + " months ago, " + elem.text()));
                 else if ((tempDiff = ((currentTime.getMonth() + 1) - (ticketTime.getMonth() + 1))) > 1)
                   elem.text(createdStr + tempDiff + " months ago, " + elem.text());
                 else if ((tempDiff = ((currentTime.getMonth() + 1) - (ticketTime.getMonth() + 1))) == 1)
@@ -160,9 +164,14 @@ $(function()
                 else if ((tempDiff = (currentTime.getDate() - ticketTime.getDate())) == 1){
                   if (currentTime.getHours() > ticketTime.getHours())
                     elem.text(createdStr + tempDiff + " day ago, " + elem.text());
-                  else 
-                    elem.text(createdStr + (currentTime.getHours() - ticketTime.getHours())
-                              + " hours ago, " + elem.text());
+                  else {
+                    if (24 - (ticketTime.getHours() - currentTime.getHours()) > 1)
+                      elem.text(createdStr + (24 - (ticketTime.getHours() - currentTime.getHours())
+                               + " hours ago, " + elem.text()));
+                    else 
+                      elem.text(createdStr + (24 - (ticketTime.getHours() - currentTime.getHours())
+                                + " hour ago, " + elem.text()));
+                  }
                 }
                 else if ((tempDiff = (currentTime.getHours() - ticketTime.getHours())) > 1)
                   elem.text(createdStr + "about " + tempDiff + " hours ago, " + elem.text());
