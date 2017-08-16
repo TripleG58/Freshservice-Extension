@@ -72,10 +72,8 @@ $(function() {
         $('div.info-data.hideForList > div.emphasize').removeClass('done');
     }
 
-    /////////// MAIN /////////////
-    // runs every second
-    // had to use setInterval b/c URL may change w/o refresh - this is weird
-    setInterval(function() {
+    //////////// MAIN ///////////
+    function main() {
         // get & format current URL
         var url = window.location.href;
         url = url.substring(4, url.length);
@@ -122,5 +120,10 @@ $(function() {
             // TODO use jquery .clone() method to make a dynamic copy of required fields at the top of the page.
             redoCSS();
         }
+    }
+    // runs every second
+    // had to use setInterval b/c URL may change w/o refresh - this is weird
+    setInterval(function() {
+        main();
     }, 1000);
 });
