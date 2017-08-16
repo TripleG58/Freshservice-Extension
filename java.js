@@ -1,11 +1,4 @@
 $(function() {
-    var url = window.location.href;
-    url = url.substring(4, url.length);
-    if (url.charAt(0) == 's') // remove 's' from 'https'
-        url = url.substring(1, url.length);
-    if (url.match("://helpdesk.msoe.edu/helpdesk/(.*)"))
-        url = "://msoe.freshservice.com/" + url.substring(20, url.length);
-
     // extension on/off toggle switch 
     // TODO code it so state is saved and meaningful (update on refresh is acceptable)
     $('.header-wrapper').append('<label class="switch" data-tip="Freshservice Helper"><input type="checkbox"><div class="slider round"><div class="slider_text" id="slider_on"><p>ON</p></div><div class="slider_text" id="slider_off"><p>OFF</p></div></div></label>');
@@ -79,45 +72,18 @@ $(function() {
         $('div.info-data.hideForList > div.emphasize').removeClass('done');
     }
 
-
-    // runs on page load
-    if (url == "://msoe.freshservice.com/helpdesk/tickets" ||
-        url.match("://msoe.freshservice.com/helpdesk/tickets/filter/(.*)") ||
-        url.match("://msoe.freshservice.com/helpdesk/tickets/view/(.*)")) {
-        // in the ticket list view, show date created 
-        // along with time agent responded, etc.
-        var tCountHigh = $('div.offset.ticketlist-total-count > b:nth-child(2)');
-        var tCountLow = $('div.offset.ticketlist-total-count > b:first');
-        var ticketCount = parseInt($(tCountHigh).text()) -
-            parseInt($(tCountLow).text()) + 1;
-        $.ajax({
-            url: "https://msoe.freshservice.com/helpdesk/tickets.json",
-            success: function(result) {
-                if (result.require_login)
-                    $.ajax({
-                        url: "https://helpdesk.msoe.edu/helpdesk/tickets.json",
-                        success: function(res) { ajaxRequest(res); }
-                    });
-                else
-                    ajaxRequest(result);
-            }
-        });
-    } else if (url.match("://msoe.freshservice.com/helpdesk/tickets/(.*)")) {
-        redoCSS();
-    }
-
-
+    /////////// MAIN /////////////
     // runs every second
-    // had to use setInterval b/c url may change w/o refresh - this is weird
+    // had to use setInterval b/c URL may change w/o refresh - this is weird
     setInterval(function() {
         // get & format current URL
-        url = window.location.href;
+        var url = window.location.href;
         url = url.substring(4, url.length);
         if (url.charAt(0) == 's') // format https
             url = url.substring(1, url.length);
         if (url.match("://helpdesk.msoe.edu/helpdesk/(.*)"))
             url = "://msoe.freshservice.com/" + url.substring(20, url.length);
-        // end formatting
+        // end URL formatting
         if (url == "://msoe.freshservice.com/helpdesk/tickets" ||
             url == "://msoe.freshservice.com/helpdesk/tickets/" ||
             url.match("://msoe.freshservice.com/helpdesk/tickets/filter/(.*)") ||
