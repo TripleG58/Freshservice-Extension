@@ -2,7 +2,9 @@ $(function() {
     // extension on/off toggle switch 
     // TODO code it so state is saved and meaningful (update on refresh is acceptable)
     $('.header-wrapper').append('<label class="switch" data-tip="Freshservice Helper"><input type="checkbox"><div class="slider round"><div class="slider_text" id="slider_on"><p>ON</p></div><div class="slider_text" id="slider_off"><p>OFF</p></div></div></label>');
-    $('.switch').click(function() {
+
+    // helper function for changing state of toggle switch
+    function changeToggleSwitch() {
         var on = $('.switch > input').prop("checked");
         if (on) {
             $('#slider_on').fadeTo(100, 1);
@@ -11,6 +13,20 @@ $(function() {
             $('#slider_on').fadeTo(100, 0);
             $('#slider_off').fadeTo(100, 1);
         }
+    }
+
+    // set starting state of toggle switch
+    chrome.storage.local.get('on', function(data) {
+        $('.switch > input').prop('checked', data.on);
+        changeToggleSwitch();
+    });
+
+    // Toggle switch on/off handler
+    $('.switch').click(function() {
+        var on = $('.switch > input').prop("checked");
+        console.log(on);
+        chrome.storage.local.set({ "on": on });
+        changeToggleSwitch();
     });
 
     // helper function for editing css of individual ticket view
