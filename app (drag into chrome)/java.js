@@ -23,7 +23,7 @@ $(function() {
   // runs every second
   // had to use setInterval b/c URL may change w/o refresh - this is weird
   setInterval(function() {
-    if()
+    if($('.switch > input').prop('checked'))
       main();
   }, 1000);
 
