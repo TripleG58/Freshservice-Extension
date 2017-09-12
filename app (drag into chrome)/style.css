@@ -21,6 +21,7 @@
 
 /* tooltip  link: https://webdesign.tutsplus.com/articles/quick-tip-tooltips-courtesy-of-html5-data-attributes--webdesign-4826*/
 .switch::before {
+  text-align: center;
   content: attr(data-tip) ;   
   border-radius: 5px;
   font-size: 10px;

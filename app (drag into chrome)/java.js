@@ -1,6 +1,6 @@
 $(function() {
   // extension on/off toggle switch 
-  $('.header-wrapper').append('<label class="switch" data-tip="Freshservice Helper"><input type="checkbox"><div class="slider round"><div class="slider_text" id="slider_on"><p>ON</p></div><div class="slider_text" id="slider_off"><p>OFF</p></div></div></label>');
+  $('.header-wrapper').append('<label class="switch" data-tip="Freshservice Helper<br/>Change Requires Refresh"><input type="checkbox"><div class="slider round"><div class="slider_text" id="slider_on"><p>ON</p></div><div class="slider_text" id="slider_off"><p>OFF</p></div></div></label>');
 
   // helper function for changing state of toggle switch
   function changeToggleSwitch() {
@@ -18,6 +18,8 @@ $(function() {
   chrome.storage.local.get('on', function(data) {
       $('.switch > input').prop('checked', data.on);
       changeToggleSwitch();
+      if($('.switch > input').prop('checked'))
+        main();
   });
 
   // runs every second
@@ -138,7 +140,6 @@ $(function() {
           }
       } else if (url.match("://msoe.freshservice.com/helpdesk/tickets/(.*)")) {
           // individual ticket view
-          // TODO use jquery .clone() method to make a dynamic copy of required fields at the top of the page.
           redoCSS();
       }
   }
