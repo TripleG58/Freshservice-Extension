@@ -4,4 +4,10 @@ Displays "Created_at" field on tickets that don't list it due to them showing "A
 
 Moves sidebar to the left when viewing individual tickets
 
-Injects On/Off toggle switch into DOM (currently nonfunctional)
+Injects On/Off toggle switch into DOM (now functional)
+
+Moves required fields to top of ticket properties
+
+Displays Requester Info in unused whitespace at top
+
+
