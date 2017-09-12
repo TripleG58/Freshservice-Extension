@@ -2,6 +2,28 @@
 .header-wrapper > * {
   vertical-align: middle;
 }
+#sticky_header {
+  display: flex;
+}
+#sticky_header > .sticky_left {
+  order: -10;
+}
+#sticky_header > .sticky_right {
+  order: 10;
+  flex: 1;
+}
+.requesterInfoNew {
+  height: 100%;
+  display: inline-block;
+  order: -9;
+  padding-right: 20px;
+}
+.requesterInfoNew > h3 {
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-size: 18px;
+  font-weight: 300;
+}
 
 /* toggle switch link: https://www.w3schools.com/howto/howto_css_switch.asp */
 
@@ -22,7 +44,7 @@
 /* tooltip  link: https://webdesign.tutsplus.com/articles/quick-tip-tooltips-courtesy-of-html5-data-attributes--webdesign-4826*/
 .switch::before {
   text-align: center;
-  content: attr(data-tip) ;   
+  content: attr(data-tip) ;
   border-radius: 5px;
   font-size: 10px;
   position:absolute;
@@ -41,6 +63,8 @@
   font-family: Roboto, "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 11px;
   font-weight: bold;
+
+  transform: translateX(-25%);
 }
 .switch:hover::before {
   opacity: 0.8;

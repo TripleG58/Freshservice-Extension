@@ -1,6 +1,6 @@
 $(function() {
   // extension on/off toggle switch 
-  $('.header-wrapper').append('<label class="switch" data-tip="Freshservice Helper<br/>Change Requires Refresh"><input type="checkbox"><div class="slider round"><div class="slider_text" id="slider_on"><p>ON</p></div><div class="slider_text" id="slider_off"><p>OFF</p></div></div></label>');
+  $('.header-wrapper').append('<label class="switch" data-tip="Freshservice Helper"><input type="checkbox"><div class="slider round"><div class="slider_text" id="slider_on"><p>ON</p></div><div class="slider_text" id="slider_off"><p>OFF</p></div></div></label>');
 
   // helper function for changing state of toggle switch
   function changeToggleSwitch() {
@@ -41,17 +41,27 @@ $(function() {
       // move sidebar to left & stylize
       // Tested, injecting CSS gets overwritten - jQuery works
       $('div.tkt-wrapper-inner.clearfix').css('margin', '0px').css('padding', '0px');
-      $('.tkt-sidebar').css('float', 'left');
-      $('.tkt-sidebar').css('margin-right', '50px');
+      $('.tkt-sidebar').css('float', 'left').css('margin-right', '50px');
       $('#tkt-inner').css('padding-right', '0px');
       $('#Pagearea').width($('#Pagearea').width()); // set constant width
       $('.leftcontent').width($('#tkt-inner').width() - 370);
-      $('a.avatar-wrap').css('position', 'relative');
-      $('a.avatar-wrap').css('left', '-30px');
+      $('a.avatar-wrap').css('position', 'relative').css('left', '-30px');
+      // move ticket properties to top
+      $('#ticket_details_sidebar').css('display', 'flex').css('flex-wrap', 'wrap');
+      $('#TicketProperties').css('order', '-10').css('margin-top', '0px').css('border', 'none').css('padding-top', '4px');
+      $('#due-by-element-parent').css('border-top', '1px solid #D9D9D9').css('width', '100%');
+      // move required ticket properties to top
+      $('#TicketPropertiesFields').css('display', 'flex').css('flex-wrap', 'wrap');
+      $('li:has(.required_star)').css('order', '-10');
+      // TODO: insert requester info
+      $('.sticky_right').css('min-width', 'initial');
+      $('#sticky_header').append('<div class="requesterInfoNew"><h3>Requester Info</h3></div>');
   }
 
   // helper function for requesting ajax via JSON
   function ajaxRequest(result, ticketCount) {
+      // console helps debugging exceeded rate limit
+      console.log("ajax request made");
       var currentTime = new Date();
       for (var i = 0; i < ticketCount; ++i) {
           var elem = $('div.info-data.hideForList > div.emphasize:not(.done):first()');
@@ -140,7 +150,9 @@ $(function() {
           }
       } else if (url.match("://msoe.freshservice.com/helpdesk/tickets/(.*)")) {
           // individual ticket view
-          redoCSS();
+          // if new html already inserted, don't redoCSS
+          if(!$('.requesterInfoNew').length)
+            redoCSS();
       }
   }
 });
