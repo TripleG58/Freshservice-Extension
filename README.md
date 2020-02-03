@@ -1,5 +1,7 @@
 # Freshservice Extension
 
+## Warning: Deprecated as UI changed a while ago
+
 ## Features
 * Displays "Created at" field on tickets that don't list it due to them showing "Agent responded:", "Closed at:", "Resolved:", or "Requester responded:"
 * Moves sidebar to the left when viewing individual tickets
